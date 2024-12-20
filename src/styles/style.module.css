@@ -1,0 +1,135 @@
+@font-face {
+  font-family: "Spotify";
+  src: url("./../assets/fonts/SpotifyFont/SpotifyMix-Black.ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Spotify";
+  src: url("./../assets/fonts/SpotifyFont/SpotifyMix-Extrabold.ttf");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Spotify";
+  src: url("./../assets/fonts/SpotifyFont/SpotifyMix-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Spotify";
+  src: url("./../assets/fonts/SpotifyFont/SpotifyMix-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Spotify";
+  src: url("./../assets/fonts/SpotifyFont/SpotifyMix-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Spotify";
+  src: url("./../assets/fonts/SpotifyFont/SpotifyMix-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Spotify";
+  src: url("./../assets/fonts/SpotifyFont/SpotifyMix-Ultra.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Spotify";
+  src: url("./../assets/fonts/SpotifyFont/SpotifyMix-Thin.ttf");
+  font-weight: 100;
+  font-style: normal;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: Spotify, sans-serif;
+  background-color: black;
+  color: #c5c5c5;
+}
+
+.authScreen {
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.authScreen .logoBack {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+}
+.authScreen .logoBack:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url("./../assets/gif/RnNe.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  filter: brightness(35%);
+}
+.authScreen .logoBack .logo {
+  color: white;
+  font-size: 150px;
+  line-height: 110px;
+}
+.authScreen .logoBack .logoThin {
+  color: #c5c5c5;
+}
+.authScreen .authButton {
+  cursor: pointer;
+  margin-bottom: 60px;
+  color: white;
+  font-size: 35px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #c5c5c5;
+}
+.authScreen .authButton img {
+  margin-left: 10px;
+  transform: translateY(3px);
+}
+
+.navBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+}
+.navBar_exit {
+  display: flex;
+}
+.navBar_profile {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+.navBar_profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
+/*# sourceMappingURL=style.module.css.map */
