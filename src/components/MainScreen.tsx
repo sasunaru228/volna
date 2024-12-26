@@ -1,29 +1,36 @@
-import React, {useEffect} from "react";
-import { observer } from "mobx-react-lite";
+import React, {useEffect, useState} from "react";
+import {observer} from "mobx-react-lite";
 import NavBar from "./NavBar.tsx";
 import {useStores} from "../stores/StoreContext.tsx";
 import axios from "axios";
 
-const MainScreen: React.FC = observer(() => {
+interface MainScreenProps {
+    player: Spotify.Player
+}
+
+const MainScreen: React.FC<MainScreenProps> = observer(({player}: MainScreenProps) => {
     const {userStore} = useStores()
     const trackUri = 'spotify:track:3gVhsZtseYtY1fMuyYq06F?si=0a398c4ca34c4d39';
-    const deviceId = userStore.device_id
-    const token = userStore.user?.token
+    const [token, setToken] = useState<string | null>(null)
+    const [deviceID, setDeviceID] = useState<string | null>(null)
     useEffect(() => {
-        console.log(userStore.user)
-        console.log(deviceId, token)
-    }, [deviceId])
+        if (userStore.user) {
+            setToken(userStore.user?.token)
+        }
+        setDeviceID(userStore.device_id)
+    }, [userStore.user, userStore.device_id])
 
     const playMusic = async () => {
-        if (!deviceId || !token) {
+        player.disconnect()
+        await player.connect()
+        if (!deviceID || !token) {
             console.error("Device ID or Token is missing");
             return;
         }
-
         try {
             await axios.put(
-                `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`,
-                { uris: [trackUri] },
+                `https://api.spotify.com/v1/me/player/play?device_id=${deviceID}`,
+                {uris: [trackUri]},
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -41,7 +48,7 @@ const MainScreen: React.FC = observer(() => {
             <NavBar/>
             <div>
                 <h2>Spotify Player</h2>
-                <button onClick={playMusic} disabled={!deviceId || !token}>play true music</button>
+                <button onClick={playMusic} disabled={!deviceID || !token}>skiiis ?</button>
             </div>
         </>
     );
