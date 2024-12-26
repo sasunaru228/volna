@@ -7,6 +7,7 @@ import userFetchedData from "../../types/userFetchedData.ts";
 import supabase from "../../utils/supabase.ts";
 import {loadSpotifySDK} from "../../utils/loadSpotifySDK.ts";
 import Loading from "../Loading/Loading.tsx";
+import classes from './MainComponent.module.css'
 
 
 const MainComponent: React.FC = observer(() => {
@@ -70,7 +71,7 @@ const MainComponent: React.FC = observer(() => {
             {isLoaded ? (
                 userStore.user
                     ? (spotifyPlayer ? <MainScreen player={spotifyPlayer}/> : null)
-                    : <LogInPage/>
+                    : <div className={classes.xxx}><LogInPage/></div>
             ) : <Loading/>
             }
         </>
