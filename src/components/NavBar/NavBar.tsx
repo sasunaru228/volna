@@ -1,8 +1,8 @@
 import React from 'react'
-import supabase from "../utils/supabase.ts";
-import {useStores} from "../stores/StoreContext.tsx";
-import classes from './../styles/style.module.css'
-import exit from './../assets/svg/Exit.svg'
+import supabase from "../../utils/supabase.ts";
+import {useStores} from "../../stores/StoreContext.tsx";
+import classes from './NavBar.module.css'
+import exit from '../../assets/svg/Exit.svg'
 
 
 const NavBar: React.FC = () => {

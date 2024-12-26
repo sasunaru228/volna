@@ -1,7 +1,7 @@
-import classes from './../styles/style.module.css'
-import supabase from "../utils/supabase.ts"
-import spotifyLogo from './../assets/svg/SpotifyLogo.svg'
-import {scopes} from "../utils/spotify.ts";
+import classes from './LoginPage.module.css'
+import supabase from "../../utils/supabase.ts"
+import spotifyLogo from '../../assets/svg/SpotifyLogo.svg'
+import {scopes} from "../../utils/spotify.ts";
 
 const LogInPage = () => {
 

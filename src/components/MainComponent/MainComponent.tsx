@@ -1,23 +1,26 @@
 import {observer} from "mobx-react-lite";
 import React, {useEffect, useState} from "react";
-import MainScreen from "./MainScreen.tsx";
-import LogInPage from "./LogInPage.tsx";
-import {useStores} from "../stores/StoreContext.tsx";
-import userFetchedData from "../types/userFetchedData.ts";
-import supabase from "../utils/supabase.ts";
-import {loadSpotifySDK} from "../utils/loadSpotifySDK.ts";
+import MainScreen from "../MainScreen/MainScreen.tsx";
+import LogInPage from "../LoginPage/LogInPage.tsx";
+import {useStores} from "../../stores/StoreContext.tsx";
+import userFetchedData from "../../types/userFetchedData.ts";
+import supabase from "../../utils/supabase.ts";
+import {loadSpotifySDK} from "../../utils/loadSpotifySDK.ts";
+import Loading from "../Loading/Loading.tsx";
 
 
 const MainComponent: React.FC = observer(() => {
     const { userStore } = useStores()
     const [sdkIsReady, setSdkIsReady] = useState<boolean>(false)
     const [spotifyPlayer, setSpotifyPlayer] = useState<Spotify.Player | null>(null)
+    const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
     const fetchUser = async () => {
         const data: userFetchedData = await supabase.auth.getSession()
         if (data) {
             userStore.setUser(data)
         }
+        setIsLoaded(true)
     }
 
     const initializeSpotifyPlayer = async () => {
@@ -37,31 +40,18 @@ const MainComponent: React.FC = observer(() => {
             volume: 0.5,
         })
 
-
         player.addListener('not_ready', () => {
             console.log('player is not ready')
         })
+
         player.addListener("ready", ({ device_id }) => {
             userStore.setDeviceId(device_id)
             console.log("Ready with Device ID", device_id)
         })
-        console.log('BEFORE CONNECTED')
+
         await player.connect()
-        console.log('CONNECTED')
         setSpotifyPlayer(player)
-        // Активируем элемент (если требуется)
-        // try {
-        //     const activateResult = await player.activateElement();
-        //     console.log("Player activated:", activateResult);
-        // } catch (error) {
-        //     console.error("Error activating player element:", error);
-        // }
     }
-    window.addEventListener('beforeunload', () => {
-        if (spotifyPlayer) {
-            spotifyPlayer.disconnect()
-        }
-    })
     useEffect(() => {
         window.onSpotifyWebPlaybackSDKReady = () => {
             console.log('onSpotifyWebPlaybackSDKReady', window.Spotify)
@@ -77,7 +67,12 @@ const MainComponent: React.FC = observer(() => {
 
     return (
         <>
-            {userStore.user && spotifyPlayer ? <MainScreen player={spotifyPlayer}/> : <LogInPage/>}
+            {isLoaded ? (
+                userStore.user
+                    ? (spotifyPlayer ? <MainScreen player={spotifyPlayer}/> : null)
+                    : <LogInPage/>
+            ) : <Loading/>
+            }
         </>
 
     )

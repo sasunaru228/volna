@@ -1,0 +1,23 @@
+.navBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+}
+.navBar_exit {
+  display: flex;
+}
+.navBar_profile {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+.navBar_profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
+/*# sourceMappingURL=NavBar.module.css.map */

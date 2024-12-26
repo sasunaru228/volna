@@ -1,5 +1,5 @@
-import {StoreProvider} from "./stores/StoreContext.tsx";
-import MainComponent from "./components/MainComponent.tsx";
+import {StoreProvider} from "./stores/StoreContext.tsx"
+import MainComponent from "./components/MainComponent/MainComponent.tsx"
 
 function App() {
 

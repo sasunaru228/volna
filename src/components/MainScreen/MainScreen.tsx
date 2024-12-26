@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
-import NavBar from "./NavBar.tsx";
-import {useStores} from "../stores/StoreContext.tsx";
+import NavBar from "../NavBar/NavBar.tsx";
+import {useStores} from "../../stores/StoreContext.tsx";
 import axios from "axios";
+import Loading from "../Loading/Loading.tsx";
+import ControlBar from "../ControlBar/ControlBar.tsx";
 
 interface MainScreenProps {
     player: Spotify.Player
@@ -46,10 +48,13 @@ const MainScreen: React.FC<MainScreenProps> = observer(({player}: MainScreenProp
     return (
         <>
             <NavBar/>
-            <div>
-                <h2>Spotify Player</h2>
-                <button onClick={playMusic} disabled={!deviceID || !token}>skiiis ?</button>
-            </div>
+            {(deviceID && token) ?
+                <div>
+                    <h2>Spotify Player</h2>
+                    <button onClick={playMusic} disabled={!deviceID || !token}>skiiis ?</button>
+                </div> : <Loading/>
+            }
+            <ControlBar/>
         </>
     );
 });
